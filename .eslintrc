@@ -1,0 +1,38 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "parser": "babel-eslint",
+    "extends": "airbnb-base",
+    "parserOptions": {
+        "ecmaVersion": 10,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [ "error", 4 ],
+        "linebreak-style": [ "error", "unix"],
+        "quotes": [ "error", "double" ],
+        "semi": [ "error", "always" ],
+        "no-console": [ 
+            "error",
+            {
+                "allow": [
+                "info",
+                "warn",
+                "error"
+                ]
+            }
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ],
+        "import/no-extraneous-dependencies": "off",
+        "no-underscore-dangle": "off",
+        "class-methods-use-this": "off"
+    }
+}
