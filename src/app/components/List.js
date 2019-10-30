@@ -18,15 +18,15 @@ export default class List extends Component {
     }
 
     handleSelectChannel() {
-        document.addEventListener("selected_channel", ({ detail }) => {
-            this.spinner.open();
+        document.addEventListener("selected_channel", this.asyncCall.bind(this));
+    }
 
-            (async () => {
-                const news = await ApiNews.getNewsOnChannel(detail);
+    async asyncCall({ detail }) {
+        this.spinner.open();
 
-                this.render(news);
-            })();
-        });
+        const news = await ApiNews.getNewsOnChannel(detail);
+
+        this.render(news);
     }
 
     render({ articles }) {
@@ -53,39 +53,43 @@ export default class List extends Component {
         const countArticles = Math.min(articles.length, NEWS_COUNT);
 
         for (let i = 0; i < countArticles; i += 1) {
-            const {
-                description,
-                publishedAt,
-                title,
-                url,
-                urlToImage,
-            } = articles[i];
-
-            const newsItem = this.createElement("div", "news-item");
-            const newsItemImg = this.createElement("img", "news-item-img", ["src", urlToImage]);
-            const newsItemBlock = this.createElement("div", "news-item-block");
-
-            newsItem.appendChild(newsItemImg);
-            newsItem.appendChild(newsItemBlock);
-
-            const newsItemBlockTitle = this.createElement("a", "news-item-block-title", ["href", url]);
-
-            const newsItemBlockDescription = this.createElement("div", "news-item-block-description");
-            const newsItemBlockDate = this.createElement("small", "news-item-block-date");
-
-            newsItemBlockTitle.textContent = title;
-
-            newsItemBlockDescription.textContent = description;
-            newsItemBlockDate.textContent = formatDate(publishedAt);
-
-            newsItemBlock.appendChild(newsItemBlockTitle);
-            newsItemBlock.appendChild(newsItemBlockDescription);
-            newsItemBlock.appendChild(newsItemBlockDate);
-
-            fragmentNews.appendChild(newsItem);
+            this.renderBlockItem(fragmentNews, articles[i]);
         }
 
         this.newsBlock.appendChild(fragmentNews);
         this.list.appendChild(this.newsBlock);
+    }
+
+    renderBlockItem(fragmentNews, articles) {
+        const {
+            description,
+            publishedAt,
+            title,
+            url,
+            urlToImage,
+        } = articles;
+
+        const newsItem = this.createElement("div", "news-item");
+        const newsItemImg = this.createElement("img", "news-item-img", ["src", urlToImage]);
+        const newsItemBlock = this.createElement("div", "news-item-block");
+
+        newsItem.appendChild(newsItemImg);
+        newsItem.appendChild(newsItemBlock);
+
+        const newsItemBlockTitle = this.createElement("a", "news-item-block-title", ["href", url]);
+
+        const newsItemBlockDescription = this.createElement("div", "news-item-block-description");
+        const newsItemBlockDate = this.createElement("small", "news-item-block-date");
+
+        newsItemBlockTitle.textContent = title;
+
+        newsItemBlockDescription.textContent = description;
+        newsItemBlockDate.textContent = formatDate(publishedAt);
+
+        newsItemBlock.appendChild(newsItemBlockTitle);
+        newsItemBlock.appendChild(newsItemBlockDescription);
+        newsItemBlock.appendChild(newsItemBlockDate);
+
+        fragmentNews.appendChild(newsItem);
     }
 }

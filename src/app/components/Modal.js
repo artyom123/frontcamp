@@ -15,8 +15,7 @@ export default class Modal extends Component {
         this.modal = document.querySelector(".modal");
 
         if (!this.modal) {
-            this.modal = this.createElement("div", "modal");
-            this.body.appendChild(this.modal);
+            this.render(text);
         }
 
         this.open(text);
