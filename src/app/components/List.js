@@ -2,10 +2,11 @@ import Component from "./Component";
 import Modal from "./Modal";
 import Spinner from "./Spinner";
 
-import ApiNews from "../ApiNews";
-
+import { LoggerRequest } from "../api/index";
 import { formatDate } from "../utils";
 
+const API_KEY = "d2be29cff2a7414d9461168e63b274cb";
+const HOST = "https://newsapi.org";
 const NEWS_COUNT = 10;
 
 export default class List extends Component {
@@ -24,20 +25,22 @@ export default class List extends Component {
     async asyncCall({ detail }) {
         this.spinner.open();
 
-        const news = await ApiNews.getNewsOnChannel(detail);
+        const url = `${HOST}/v1/articles?source=${detail}&apiKey=${API_KEY}`;
+        const news = await LoggerRequest.send({ method: "GET", url });
 
         this.render(news);
     }
 
-    render({ articles }) {
+    render(news) {
+        const { articles } = news;
+
+        this.spinner.close();
         this.isCreateBlock();
 
         if (articles) {
             this.modal.close();
             this.renderBlock(articles);
-        } else this.modal = new Modal("Choose another option");
-
-        this.spinner.close();
+        } else this.modal = new Modal(news);
     }
 
     isCreateBlock() {

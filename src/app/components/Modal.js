@@ -30,8 +30,11 @@ export default class Modal extends Component {
 
     open(text) {
         this.modal.classList.add("top-animation");
-        this.select.classList.add("disabled");
         this.modal.textContent = text;
+
+        if (this.select) {
+            this.select.classList.add("disabled");
+        }
 
         setTimeout(this.close.bind(this), TIME_SHOW_MODAL);
     }

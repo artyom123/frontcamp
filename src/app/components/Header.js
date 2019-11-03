@@ -24,6 +24,7 @@ export default class Header extends Component {
     renderSelect() {
         const fragmentOptions = document.createDocumentFragment();
         const select = this.createElement("select", "select-channels");
+        let optionFirst = null;
 
         channels.forEach((item, index) => {
             const option = this.createElement("option");
@@ -33,7 +34,7 @@ export default class Header extends Component {
             option.value = valueItem;
 
             if (index === 0) {
-                this.dispatchSelected(this.header, valueItem);
+                optionFirst = valueItem;
             }
 
             fragmentOptions.appendChild(option);
@@ -41,6 +42,8 @@ export default class Header extends Component {
 
         select.appendChild(fragmentOptions);
         this.header.appendChild(select);
+
+        this.dispatchSelected(this.header, optionFirst);
 
         this.handleClick(select);
     }
