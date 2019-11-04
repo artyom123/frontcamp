@@ -1,5 +1,4 @@
 import Component from "./Component";
-import Modal from "./Modal";
 import Spinner from "./Spinner";
 
 import { LoggerRequest } from "../api/index";
@@ -38,9 +37,13 @@ export default class List extends Component {
         this.isCreateBlock();
 
         if (articles) {
-            this.modal.close();
             this.renderBlock(articles);
-        } else this.modal = new Modal(news);
+        } else this.asyncCallModal(news);
+    }
+
+    async asyncCallModal(text) {
+        this.modal = await import("./Modal");
+        this.modal.default.render(text);
     }
 
     isCreateBlock() {

@@ -2,30 +2,24 @@ import Component from "./Component";
 
 const TIME_SHOW_MODAL = 3000;
 
-export default class Modal extends Component {
-    constructor(text) {
+class Modal extends Component {
+    constructor() {
         super();
         this.body = document.body;
         this.select = document.querySelector(".select-channels");
-
-        this.isExist(text);
-    }
-
-    isExist(text) {
-        this.modal = document.querySelector(".modal");
-
-        if (!this.modal) {
-            this.render(text);
-        }
-
-        this.open(text);
     }
 
     render(text) {
-        this.modal = this.createElement("div", "modal");
-        this.modal.textContent = text;
+        this.modal = document.querySelector(".modal");
 
-        this.body.appendChild(this.modal);
+        if (!this.modal) {
+            this.modal = this.createElement("div", "modal");
+            this.modal.textContent = text;
+
+            this.body.appendChild(this.modal);
+        }
+
+        this.open(text);
     }
 
     open(text) {
@@ -44,3 +38,7 @@ export default class Modal extends Component {
         this.modal.classList.remove("top-animation");
     }
 }
+
+const modal = new Modal();
+
+export default modal;
