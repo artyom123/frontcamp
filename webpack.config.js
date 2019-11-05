@@ -14,7 +14,7 @@ const distPath = path.join(__dirname, '/dist');
 
 module.exports = {
     mode: isProduction ? PRODUCTION : DEVELOPMENT,
-    entry: ['@babel/polyfill', './src/index.js'],
+    entry: ['@babel/polyfill', './src/controller/index.js'],
     output: {
         filename: 'bundle.js',
         path: distPath,

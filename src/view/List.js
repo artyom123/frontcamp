@@ -1,8 +1,8 @@
-import Component from "./Component";
+import Component from "./component/Component";
 import Spinner from "./Spinner";
 
-import { RequestFactory } from "../api/index";
-import { formatDate } from "../utils";
+import { RequestFactory } from "../model/index";
+import { formatDate } from "../common/utils";
 
 const API_KEY = "d2be29cff2a7414d9461168e63b274cb";
 const HOST = "https://newsapi.org";

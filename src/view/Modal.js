@@ -1,4 +1,4 @@
-import Component from "./Component";
+import Component from "./component/Component";
 
 const TIME_SHOW_MODAL = 3000;
 

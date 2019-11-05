@@ -1,4 +1,6 @@
-import Component from "./Component";
+import Component from "./component/Component";
+
+const TEXT_FOOTER = "Powered by NEWSAPI";
 
 export default class Footer extends Component {
     constructor() {
@@ -12,7 +14,7 @@ export default class Footer extends Component {
         const FooterInformation = this.createElement("small", "footer-information");
 
         footerCopyright.textContent = `© ${new Date().getFullYear()}`;
-        FooterInformation.textContent = "Powered by NEWSAPI";
+        FooterInformation.textContent = TEXT_FOOTER;
 
         footerWrapper.appendChild(footerCopyright);
         footerWrapper.appendChild(FooterInformation);

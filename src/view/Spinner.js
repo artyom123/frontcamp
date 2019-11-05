@@ -1,4 +1,4 @@
-import Component from "./Component";
+import Component from "./component/Component";
 
 export default class Spinner extends Component {
     constructor() {

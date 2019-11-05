@@ -1,6 +1,8 @@
-import Component from "./Component";
+import Component from "./component/Component";
 import List from "./List";
-import { channels } from "../data/channels";
+import { channels } from "../common/data/channels";
+
+const TEXT_HEAD_TITLE = "News headlines";
 
 export default class Header extends Component {
     constructor() {
@@ -17,7 +19,7 @@ export default class Header extends Component {
     renderTitle() {
         const h1 = this.createElement("h1");
 
-        h1.textContent = "News headlines";
+        h1.textContent = TEXT_HEAD_TITLE;
         this.header.appendChild(h1);
     }
 

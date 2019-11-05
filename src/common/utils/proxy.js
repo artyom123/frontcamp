@@ -1,5 +1,5 @@
 /* eslint-disable no-console, no-param-reassign */
-import { RequestFactory } from "./index";
+import { RequestFactory } from "../../model/index";
 
 const LoggerRequest = new Proxy(RequestFactory, {
     get(target, name, receiver) {
