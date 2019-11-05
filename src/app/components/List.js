@@ -1,7 +1,7 @@
 import Component from "./Component";
 import Spinner from "./Spinner";
 
-import { LoggerRequest } from "../api/index";
+import { RequestFactory } from "../api/index";
 import { formatDate } from "../utils";
 
 const API_KEY = "d2be29cff2a7414d9461168e63b274cb";
@@ -25,7 +25,7 @@ export default class List extends Component {
         this.spinner.open();
 
         const url = `${HOST}/v1/articles?source=${detail}&apiKey=${API_KEY}`;
-        const news = await LoggerRequest.send({ method: "GET", url });
+        const news = await RequestFactory.send({ method: "GET", url });
 
         this.render(news);
     }

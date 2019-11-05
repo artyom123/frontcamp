@@ -1,4 +1,5 @@
 import "./index.scss";
+import "./app/api/proxy";
 
 import Header from "./app/components/Header";
 import Footer from "./app/components/Footer";

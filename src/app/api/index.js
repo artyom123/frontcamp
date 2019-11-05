@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 export function Request({ method, url }) {
     const headers = new Headers();
 
@@ -20,15 +19,3 @@ export class RequestFactory {
         return new Request(options);
     }
 }
-
-export const LoggerRequest = new Proxy(RequestFactory, {
-    get(target, name, receiver) {
-        return Reflect.get({
-            send(options) {
-                console.log(`Request type: ${options.method}`);
-                console.log(`Url: ${options.url}`);
-                return target.send(options);
-            },
-        }, name, receiver);
-    },
-});
