@@ -39,6 +39,7 @@
     "cors": "^2.8.5",
     "css-loader": "^3.2.0",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "html-loader": "^0.5.5",
     "http-status": "^1.4.1",
     "nodemon": "^2.0.1",
@@ -46,6 +47,7 @@
     "postcss-loader": "^3.0.0",
     "ramda": "^0.26.1",
     "style-loader": "^1.0.0",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.9.0",
+    "winston": "^3.2.1"
   }
 }

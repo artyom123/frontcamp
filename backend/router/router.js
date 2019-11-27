@@ -6,6 +6,7 @@ const router = express.Router();
 
 const container = require("../container");
 const newsRepository = require("../app/model/index");
+const logger = require("../logger/index");
 
 const { database } = container.cradle;
 const newsModel = compose(newsRepository)(database);
@@ -23,23 +24,25 @@ const putModel = put({ newsRepository: newsModel });
 const deleteModel = remove({ newsRepository: newsModel });
 
 router.get("/", (req, res) => {
-    console.log("Get all news");
+    logger.info("Get all news");
 
     getModel
         .find(req, res)
         .then(data => res.status(Status.OK).json(data))
         .catch((error) => {
+            logger.error(error);
             res.status(Status.BAD_REQUEST).json(error.message);
         });
 });
 
 router.get("/:id", (req, res) => {
-    console.log(`Getting news by id ${req.params.id}`);
+    logger.info(`Getting news by id ${req.params.id}`);
 
     getModel
         .findOne(req, res)
         .then(data => res.status(Status.OK).json(data))
         .catch((error) => {
+            logger.error(error);
             res.status(Status.BAD_REQUEST).json(error.message);
         });
 });
@@ -56,23 +59,25 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-    console.log(`Updating news by id ${req.params.id}`);
+    logger.info(`Updating news by id ${req.params.id}`);
 
     putModel
         .update(req, res)
         .then(data => res.status(Status.OK).json(data))
         .catch((error) => {
+            logger.error(error);
             res.status(Status.BAD_REQUEST).json(error.message);
         });
 });
 
 router.delete("/:id", (req, res) => {
-    console.log(`Deleting news by id ${req.params.id}`);
+    logger.info(`Deleting news by id ${req.params.id}`);
 
     deleteModel
         .remove(req, res)
         .then(data => res.status(Status.OK).json(data))
         .catch((error) => {
+            logger.error(error);
             res.status(Status.BAD_REQUEST).json(error.message);
         });
 });
