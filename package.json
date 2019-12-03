@@ -9,7 +9,7 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "start-project": "webpack-dev-server --hot --open",
-    "start": "nodemon backend/server.js"
+    "start": "nodemon backend/index.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -36,13 +36,19 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "css-loader": "^3.2.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "fs": "0.0.1-security",
     "html-loader": "^0.5.5",
     "http-status": "^1.4.1",
+    "mongoose": "^5.7.13",
     "nodemon": "^2.0.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",
     "ramda": "^0.26.1",
