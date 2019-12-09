@@ -1,0 +1,19 @@
+// Colors
+
+$primaryWhite: #ffffff;
+$primaryRed: #f65261;
+
+$secondaryBlack: #000000;
+$secondaryDarkGray: #232323;
+$secondaryGray: #424242;
+$secondaryLightGray: #555555;
+
+:export {
+    primaryWhite: $primaryWhite;
+    primaryRed: $primaryRed;
+
+    secondaryBlack: $secondaryBlack;
+    secondaryDarkGray: $secondaryDarkGray;
+    secondaryGray: $secondaryGray;
+    secondaryLightGray: $secondaryLightGray;
+}
