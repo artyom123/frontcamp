@@ -1,15 +1,22 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Header from './components/header/Header';
-import Main from './components/main/Main';
-import Footer from './components/footer/Footer';
+import ErrorBoundary from './error/ErrorBoundary';
+
+import Home from './components/pages/Home';
+import Film from './components/pages/Film';
+import NotFound from './components/pages/NotFound';
 
 const App = () => (
-    <>
-        <Header />
-        <Main />
-        <Footer />
-    </>
+    <ErrorBoundary>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/film/:id" component={Film}/>
+                <Route component={NotFound}/>
+            </Switch>
+        </BrowserRouter>
+    </ErrorBoundary>
 );
 
 export default App;

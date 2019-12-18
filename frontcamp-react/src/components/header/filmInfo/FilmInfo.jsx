@@ -1,69 +1,71 @@
 import React from 'react';
 import {
+    makeStyles,
     Grid,
     Typography,
+    Link,
 } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import { head } from 'lodash';
 
-const propTypes = {
-    film: PropTypes.oneOfType([PropTypes.object]),
-};
-const defaultProps = {
-    film: {},
-};
+import Logo from '../logo/Logo';
 
 const FilmInfo = ({film}) => {
-    const {
-        title,
-        year,
-        runtime,
-        genre,
-        plot,
-        imdbRating,
-        images,
-    } = film;
-
     return (
-        <>
+        <Grid>
             <Grid>
-                <img src={head(images)} alt={title}/>
+                <Logo />
+
+                <Link href="/">
+                    Search
+                </Link>
             </Grid>
+
             <Grid>
-                <Grid>
-                    <Typography variant="h6">
-                        {title}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        {imdbRating}
-                    </Typography>
-                </Grid>
-                <Typography variant="body2" component="p">
-                    {genre}
-                </Typography>
+                <img src={film.poster_path}/>
+
                 <Grid>
                     <Grid>
-                        <Typography variant="body2" component="p">
-                            {year}
+                        <Typography variant="h3">
+                            {film.title}
                         </Typography>
-                        year
+                        <Grid>
+                            {film.vote_average}
+                        </Grid>
                     </Grid>
+
                     <Grid>
-                        <Typography variant="body2" component="p">
-                            {runtime}
-                        </Typography>
-                        min
+                        <Grid>
+                            <Typography
+                                    className={classes.cardInfoTitle}
+                                    variant="body2"
+                                    component="p"
+                            >
+                                {film.release_date}
+                            </Typography>
+                            year
+                        </Grid>
+                        {
+                            film.runtime && (
+                                <Grid>
+                                    <Typography
+                                            className={classes.cardInfoTitle}
+                                            variant="body2"
+                                            component="p"
+                                    >
+                                        {film.runtime}
+                                    </Typography>
+                                    min
+                                </Grid>
+                            )
+                        }
+                    </Grid>
+
+                    <Grid>
+                        {film.overview}
                     </Grid>
                 </Grid>
-                <Typography variant="body2" component="p">
-                    {plot}
-                </Typography>
             </Grid>
-        </>
+        </Grid>
     );
 };
-
-FilmInfo.propTypes = propTypes;
-FilmInfo.defaultProps = defaultProps;
 
 export default FilmInfo;

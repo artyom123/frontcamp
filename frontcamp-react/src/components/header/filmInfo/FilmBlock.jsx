@@ -9,17 +9,16 @@ import {
     CardContent,
     Typography,
 } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import { head } from 'lodash';
 
 import stylesConstants from '../../../styles/constants.module.scss';
 
 const useStyles = makeStyles({
     cardMedia: {
         width: '100%',
+        height: '340px',
     },
     card: {
-        width: '300px',
+        width: '240px',
         margin: '35px 10px',
         backgroundColor: 'transparent',
         color: 'rgba(255, 255, 255, 0.6)',
@@ -35,6 +34,7 @@ const useStyles = makeStyles({
         border: `1px solid ${stylesConstants.primaryWhite}`,
         borderRadius: '5px',
         fontSize: '10px',
+        marginLeft: '5px',
     },
     cardInfoGenre: {
         padding: '10px 0',
@@ -45,27 +45,19 @@ const useStyles = makeStyles({
     },
 });
 
-const propTypes = {
-    film: PropTypes.oneOfType([PropTypes.object]),
-};
-const defaultProps = {
-    film: {},
-};
-
-const Film = ({film}) => {
-    const history = useHistory();
-    const classes = useStyles();
+const FilmBlock = ({ instance }) => {
     const {
+        id,
+        poster_path,
         title,
-        year,
-        genre,
-        images,
-    } = film;
+        release_date,
+        genres,
+    } = instance;
+    const classes = useStyles();
+    const history = useHistory();
 
     const handleClick = () => {
-        const url = (title.toLowerCase()).replace(/\s/g, "_");
-
-        history.push(`/film/${url}`);
+        history.push(`/film/${id}`);
     };
 
     return (
@@ -76,9 +68,8 @@ const Film = ({film}) => {
             <CardActionArea>
                 <CardMedia
                     className={classes.cardMedia}
-                    image={head(images)}
+                    image={poster_path}
                     title={title}
-                    height="140"
                     component="img"
                 />
                 <CardContent>
@@ -97,7 +88,7 @@ const Film = ({film}) => {
                             variant="body2"
                             component="p"
                         >
-                            {year}
+                            {release_date.slice(0, 4)}
                         </Typography>
                     </Grid>
                     <Typography
@@ -105,7 +96,7 @@ const Film = ({film}) => {
                         variant="body2"
                         component="p"
                     >
-                        {genre}
+                        {genres.join(', ')}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -113,7 +104,4 @@ const Film = ({film}) => {
     );
 };
 
-Film.propTypes = propTypes;
-Film.defaultProps = defaultProps;
-
-export default Film;
+export default FilmBlock;

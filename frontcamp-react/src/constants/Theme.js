@@ -16,103 +16,47 @@ const THEME = createMuiTheme({
         useNextVariants: true,
     },
     overrides: {
-        MuiAppBar: {
-            root: {
-                boxShadow: 'none',
-                borderBottom: '1px solid #E6E6E6',
-            },
-            colorPrimary: {
-                backgroundColor: stylesConstants.primaryWhite,
-            },
-        },
-        MuiLink: {
-            root: {
-                textDecoration: 'none',
-            },
-        },
         MuiButton: {
             root: {
-                fontFamily: 'Open Sans Bold',
-                letterSpacing: '1.5px',
                 borderRadius: '4px',
+                fontSize: '14px',
                 backgroundColor: stylesConstants.primaryRed,
-            },
-        },
-        MuiAvatar: {
-            colorDefault: {
-                color: stylesConstants.secondaryGray,
-                backgroundColor: stylesConstants.secondaryLightGray,
-                fontFamily: 'Open Sans Bold',
-                letterSpacing: '-1px',
-                fontSize: '0.875rem',
-                marginRight: '8px',
-                marginLeft: '8px',
-            },
-        },
-        MuiMenu: {
-            paper: {
-                boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23)',
-            },
-        },
-        MuiSvgIcon: {
-            fontSizeSmall: {
-                fontSize: '20px',
-            },
-            fontSizeLarge: {
-                fontSize: '34px',
-            },
-        },
-        MuiIconButton: {
-            root: {
-                color: stylesConstants.secondaryGray,
-                padding: '9px',
+                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                color: stylesConstants.primaryWhite,
                 '&:hover': {
-                    backgroundColor: 'transparent',
-                    color: stylesConstants.secondaryBlack,
-                },
-                '&$disabled': {
-                    color: stylesConstants.secondaryLightGray,
+                    backgroundColor: stylesConstants.primaryRedLight,
                 },
             },
         },
-        MuiCheckbox: {
+        MuiTypography: {
             root: {
-                color: stylesConstants.secondaryGray,
-                padding: '9px',
-                '&:hover': {
-                    backgroundColor: 'transparent',
-                    color: stylesConstants.secondaryBlack,
-                },
-                '&$checked': {
-                    color: stylesConstants.primaryRed,
-                    '&:hover': {
-                        backgroundColor: 'transparent',
-                        color: stylesConstants.primaryRed,
-                    },
-                },
+                color: stylesConstants.primaryWhite,
             },
         },
-        MuiFormControlLabel: {
-            label: {
-                fontFamily: 'Open Sans Light',
-                fontSize: '18px',
-                color: stylesConstants.secondaryDarkGray,
-                '&:hover': {
-                    backgroundColor: 'transparent',
-                    color: stylesConstants.secondaryBlack,
-                },
-            },
-        },
-        MuiTouchRipple: {
+        MuiGrid: {
             root: {
-                zIndex: 2,
+                color: stylesConstants.primaryWhite,
             },
         },
         MuiInputBase: {
-            input: {
-                '&::placeholder': {
-                    fontSize: '14px !important',
-                },
+            root: {
+                paddingLeft: '10px',
+                paddingRight: '10px',
+                width: '100%',
+                backgroundColor: stylesConstants.secondaryLightGray,
+            },
+        },
+        MuiTab: {
+            wrapper: {
+                width: 'auto',
+                pointerEvents: 'none',
+                color: stylesConstants.primaryWhite,
+            },
+            indicator: {
+                backgroundColor: stylesConstants.primaryWhite,
+            },
+            fixed: {
+                borderRadius: '5px',
             },
         },
     },

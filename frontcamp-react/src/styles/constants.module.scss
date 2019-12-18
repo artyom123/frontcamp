@@ -2,6 +2,7 @@
 
 $primaryWhite: #ffffff;
 $primaryRed: #f65261;
+$primaryRedLight: #f57a85;
 
 $secondaryBlack: #000000;
 $secondaryDarkGray: #232323;
@@ -11,6 +12,7 @@ $secondaryLightGray: #555555;
 :export {
     primaryWhite: $primaryWhite;
     primaryRed: $primaryRed;
+    primaryRedLight: $primaryRedLight;
 
     secondaryBlack: $secondaryBlack;
     secondaryDarkGray: $secondaryDarkGray;

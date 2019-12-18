@@ -1,21 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { MuiThemeProvider } from '@material-ui/core';
 
 import App from './App';
 
-import { MuiThemeProvider } from '@material-ui/core';
+import reducer from './reducer/index';
+import saga from './sagas/index';
 
-import ErrorBoundary from './error/ErrorBoundary';
 import THEME from './constants/Theme';
 
+const initialState = {
+    movies: {
+        searchBy: {
+            values: [
+                { title: 'title' },
+                { genre: 'genre' },
+            ],
+            active: 'title',
+        },
+        searchValue: '',
+        items: [],
+        sortBy: {
+            values: [
+                {'release_date': 'release date'},
+                {'vote_average': 'raiting'},
+            ],
+            active: 'release_date',
+        },
+    },
+    movie: {
+        item: null,
+        relatedMovies: {
+            criteria: 'genres',
+            items: [],
+        },
+    },
+};
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+    reducer,
+    initialState,
+    applyMiddleware(sagaMiddleware)
+);
+sagaMiddleware.run(saga, store.dispatch, store.getState);
+
 ReactDOM.render(
-    <ErrorBoundary>
-        <BrowserRouter>
-            <MuiThemeProvider theme={THEME}>
-                <App/>
-            </MuiThemeProvider>
-        </BrowserRouter>
-    </ErrorBoundary>,
+    <Provider store={store}>
+        <MuiThemeProvider theme={THEME}>
+            <App/>
+        </MuiThemeProvider>
+    </Provider>,
     document.getElementById('root')
 );

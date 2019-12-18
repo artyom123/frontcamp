@@ -13,7 +13,7 @@ const Logo = () => {
     const classes = useStyles();
 
     return (
-        <Link className={classes.link}>
+        <Link to="/" className={classes.link}>
             <strong>netflix</strong>
             roulette
         </Link>

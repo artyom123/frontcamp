@@ -1,30 +1,20 @@
 import React from 'react';
 import {
+    makeStyles,
     Container,
     Grid,
-    Typography,
-    makeStyles,
 } from '@material-ui/core';
 
+import Search from './search/Search';
 import Logo from './logo/Logo';
-import SearchBar from './searchBar/SearchBar';
 
 import stylesConstants from '../../styles/constants.module.scss';
 
 const useStyles = makeStyles({
-    container: {
-        minHeight: '300px',
+    grid: {
         backgroundColor: stylesConstants.secondaryDarkGray,
         paddingTop: '20px',
-    },
-    grid: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        marginTop: '35px',
-    },
-    typography: {
-        color: stylesConstants.primaryWhite,
+        paddingBottom: '20px',
     },
 });
 
@@ -32,20 +22,12 @@ const Header = () => {
     const classes = useStyles();
 
     return (
-        <Container className={classes.container}>
-            <Grid>
+        <Grid className={classes.grid}>
+            <Container>
                 <Logo />
-                <Grid className={classes.grid}>
-                    <Typography
-                        className={classes.typography}
-                        variant="h4"
-                    >
-                        Find your movie
-                    </Typography>
-                    <SearchBar />
-                </Grid>
-            </Grid>
-        </Container>
+                <Search/>
+            </Container>
+        </Grid>
     );
 };
 
