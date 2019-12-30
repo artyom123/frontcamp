@@ -8,7 +8,7 @@ import {
 
 import * as Api from '../api';
 
-function* fetchMovies(action) {
+function* fetchMovies() {
     const searchInfo = yield select((state) => state.movies);
     const movies = yield call(Api.getFilms, searchInfo);
 

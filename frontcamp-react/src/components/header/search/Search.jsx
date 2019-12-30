@@ -1,5 +1,6 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React, { useRef, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import {
     makeStyles,
     Container,
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'space-between',
         marginTop: '20px',
+        marginBottom: '20px',
     },
     button: {
         marginLeft: '10px',
@@ -30,18 +32,49 @@ const useStyles = makeStyles({
         marginBottom: '30px',
         marginTop: '20px',
     },
+    inputBase: {
+        color: stylesConstants.primaryWhite,
+    },
 });
 
-const Search = (props) => {
-    let search = '';
+const Search = () => {
+    const location = useLocation();
+    const history = useHistory();
+    const dispatch = useDispatch();
     const classes = useStyles();
 
-    const handleChange = ({target}) => {
-        search = target.value;
+    const dispatchSearch = () => {
+        dispatch({
+            type: 'SEARCH_VALUE',
+            searchValue: searchInput.current.value || location.search.slice(1),
+        });
+        dispatch({
+            type: 'MOVIES_FETCH',
+        });
+    };
+
+    const searchInput = useRef();
+
+    const { searchBy } = useSelector((state) => ({
+        searchBy: state.movies.searchBy,
+    }), shallowEqual);
+
+    useEffect(() => {
+        searchInput.current.value = location.search.slice(1);
+        dispatchSearch();
+    }, [location.search]);
+
+    const changeSearchBy = (item) => {
+        dispatch({
+            type: 'SEARCH_BY',
+            active: item,
+        });
     };
 
     const handleClick = () => {
-        props.setSearchValue(search);
+        history.push(`/search/?${searchInput.current.value}`);
+        history.replace({ path: location.pathname, search: searchInput.current.value });
+        dispatchSearch();
     };
 
     return (
@@ -55,7 +88,10 @@ const Search = (props) => {
             </Typography>
 
             <Grid className={classes.grid}>
-                <InputBase onChange={handleChange}/>
+                <InputBase
+                    className={classes.inputBase}
+                    inputRef={searchInput}
+                />
                 <Button
                     className={classes.button}
                     onClick={handleClick}
@@ -65,44 +101,11 @@ const Search = (props) => {
             </Grid>
             <Filter
                 content="Search By"
-                value={props.active}
-                items={props.values}
-                setActive={props.setSearchFilter}
+                items={searchBy.values}
+                actionFilter={changeSearchBy}
             />
         </Container>
     );
 };
 
-function mapStateToProps ({ movies }) {
-    const { searchBy } = movies;
-
-    return {
-        active: searchBy.active,
-        values: searchBy.values,
-    };
-}
-
-function mapDispatchToProps (dispatch) {
-    return {
-        setSearchValue: (value) => {
-            dispatch({
-                type: 'SEARCH_VALUE',
-                searchValue: value,
-            });
-            dispatch({
-                type: 'MOVIES_FETCH',
-            });
-        },
-        setSearchFilter: (value) => {
-            dispatch({
-                type: 'SEARCH_BY',
-                active: value,
-            });
-            dispatch({
-                type: 'MOVIES_FETCH',
-            });
-        },
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default Search;

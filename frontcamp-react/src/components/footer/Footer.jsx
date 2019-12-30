@@ -21,13 +21,13 @@ const Footer = () => {
     const classes = useStyles();
 
     return (
-        <Container
+        <Grid
             className={classes.container}
         >
-            <Grid>
+            <Container>
                 <Logo />
-            </Grid>
-        </Container>
+            </Container>
+        </Grid>
     );
 };
 

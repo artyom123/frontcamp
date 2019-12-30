@@ -1,31 +1,18 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {
-    makeStyles,
-    Grid,
-} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 import FilmsContainer from './film/FilmsContainer';
-import FilmsHeader from './count/FilmsHeader';
+import CountFilms from './count/CountFilms';
 
-const Main = (props) => {
-
-    return (
+const Main = ({films}) => (
+    <Grid>
         <Grid>
-            <Grid>
-                <FilmsHeader count={props.items.length}/>
-            </Grid>
-            <Grid>
-                <FilmsContainer items={props.items}/>
-            </Grid>
+            <CountFilms count={films.length}/>
         </Grid>
-    );
-};
+        <Grid>
+            <FilmsContainer items={films}/>
+        </Grid>
+    </Grid>
+);
 
-function mapStateToProps (state){
-    return {
-        items: state.movies.items,
-    };
-};
-
-export default connect(mapStateToProps)(Main);
+export default Main;

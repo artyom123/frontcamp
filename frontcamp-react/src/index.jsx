@@ -17,7 +17,7 @@ const initialState = {
         searchBy: {
             values: [
                 { title: 'title' },
-                { genre: 'genre' },
+                { genres: 'genre' },
             ],
             active: 'title',
         },

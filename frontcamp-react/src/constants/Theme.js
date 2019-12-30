@@ -52,11 +52,20 @@ const THEME = createMuiTheme({
                 pointerEvents: 'none',
                 color: stylesConstants.primaryWhite,
             },
-            indicator: {
-                backgroundColor: stylesConstants.primaryWhite,
+            root: {
+                minWidth: '120px !important',
+                padding: '2px 10px',
+                '&$selected': {
+                    backgroundColor: stylesConstants.primaryRed,
+                },
             },
+        },
+        MuiTabs: {
             fixed: {
                 borderRadius: '5px',
+            },
+            indicator: {
+                backgroundColor: stylesConstants.primaryWhite,
             },
         },
     },

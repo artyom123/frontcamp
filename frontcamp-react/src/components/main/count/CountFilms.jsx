@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import {
     makeStyles,
     Grid,
@@ -23,45 +23,37 @@ const useStyles = makeStyles({
     },
 });
 
-const FilmsHeader = (props) => {
+const CountFilms = ({count}) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const { sortBy } = useSelector((state) => ({
+        sortBy: state.movies.sortBy,
+    }), shallowEqual);
+
+    const changeSortBy = (item) => {
+        dispatch({
+            type: 'SORT_BY',
+            active: item,
+        });
+        dispatch({ type: 'MOVIES_FETCH' });
+    };
+
 
     return (
         <Grid className={classes.grid}>
             <Container className={classes.container}>
                 <Grid>
-                    <strong>{props.count}</strong> movies found
+                    <strong>{count}</strong> movies found
                 </Grid>
                 <Filter
                     content="Sort by"
-                    value={props.active}
-                    items={props.items}
-                    setActive={props.setSorting}
+                    items={sortBy.values}
+                    actionFilter={changeSortBy}
                 />
             </Container>
         </Grid>
       );
 };
 
-function mapStateToProps (state){
-    return {
-        items: state.movies.sortBy.values,
-        active: state.movies.sortBy.active,
-    };
-};
-
-function mapDispatchToProps (dispatch){
-    return {
-        setSorting: (value) => {
-            dispatch({
-                type: 'SORT_BY',
-                active: value,
-            });
-            dispatch({
-                type: 'MOVIES_FETCH',
-            });
-        },
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilmsHeader);
+export default CountFilms;

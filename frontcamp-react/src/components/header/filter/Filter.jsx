@@ -16,24 +16,30 @@ const useStyles = makeStyles({
     },
     gridContent: {
         textTransform: 'uppercase',
-        fontSize: '10px',
+        fontSize: '12px',
+        marginRight: '10px',
     },
 });
 
 const Filter = (props) => {
+    const {
+        content,
+        items,
+        actionFilter,
+    } = props;
     const classes = useStyles();
+
     const [value, setValue] = React.useState(0);
-    console.log(props);
 
     const handleChange = ({target}) => {
         setValue(Number(target.dataset.activeNumber));
-        props.setActive(target.dataset.name);
+        actionFilter(target.dataset.name);
     }
 
     return (
         <Grid className={classes.grid}>
             <Grid className={classes.gridContent}>
-                {props.content}
+                {content}
             </Grid>
             <Tabs
                 className={classes.tabs}
@@ -42,7 +48,7 @@ const Filter = (props) => {
                 aria-label="tabs"
             >
                 {
-                    props.items.map((item, index) => (
+                    items.map((item, index) => (
                         <Tab
                             key={Object.values(item)[0]}
                             label={Object.values(item)[0]}

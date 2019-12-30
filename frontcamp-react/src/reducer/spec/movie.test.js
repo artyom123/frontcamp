@@ -1,39 +1,42 @@
 import movie from '../movie';
-import {
-  setMovie,
-} from '../../action/movie';
-
 
 const initialState = {
-    searchBy: {
-        values: [
-            { title: 'title' },
-            { genre: 'genre' },
-        ],
-        active: 'title',
-    },
-    searchValue: '',
-    items: [],
-    sortBy: {
-        values: [
-            {'release_date': 'release date'},
-            {'vote_average': 'raiting'},
-        ],
-        active: 'vote_average',
+    item: null,
+    relatedMovies: {
+        criteria: 'genres',
+        items: [],
     },
 };
 
 describe('movie reducer', () => {
-    describe('SET_MOVIE action', () => {
-        it('item', () => {
-            const item = 'someValue';
-            const action = setMovie(item);
-            const result = movie(initialState, action);
+    it('SET_MOVIE action', () => {
+        const item = 'someValue';
+        const action = {
+            type: 'SET_MOVIE',
+            item,
+        };
+        const result = movie(initialState, action);
 
-            expect(result).toEqual({
-                ...initialState,
-                item,
-            });
+        expect(result).toEqual({
+            ...initialState,
+            item,
+        });
+    });
+
+    it('SET_RELATED_MOVIES action', () => {
+        const items = [];
+        const action = {
+            type: 'SET_RELATED_MOVIES',
+            items,
+        };
+        const result = movie(initialState, action);
+
+        expect(result).toEqual({
+            ...initialState,
+            relatedMovies: {
+                ...initialState.relatedMovies,
+                items,
+            },
         });
     });
 });

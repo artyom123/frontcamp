@@ -1,20 +1,28 @@
-import React from 'react';
-import {
-    Grid,
-} from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { Grid } from '@material-ui/core';
 
 import Main from '../main/Main';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
 
-import stylesConstants from '../../styles/constants.module.scss';
+const Home = () => {
+    const dispatch = useDispatch();
+    const { films } = useSelector((state) => ({
+        films: state.movies.items,
+    }), shallowEqual);
 
-const Home = () => (
-    <Grid>
-        <Header/>
-        <Main/>
-        <Footer/>
-    </Grid>
-);
+    useEffect(() => {
+        dispatch({ type: 'MOVIES_FETCH' });
+    }, []);
+
+    return (
+        <Grid>
+            <Header/>
+            <Main films={films}/>
+            <Footer/>
+        </Grid>
+    );
+};
 
 export default Home;

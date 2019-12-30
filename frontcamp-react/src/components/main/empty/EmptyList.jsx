@@ -1,10 +1,10 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 const EmptyList = ({ content }) => (
-    <Grid>
+    <Typography variant="h3">
         { content }
-    </Grid>
+    </Typography>
 );
 
 export default EmptyList;
