@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-grow: 3;
+  flex-basis: 0;
+  background: #f57878;
+  color: white;
+
+  h1 {
+    font-size: 5rem;
+  }
+}
