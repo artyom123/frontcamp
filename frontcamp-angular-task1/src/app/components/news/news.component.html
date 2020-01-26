@@ -1,0 +1,17 @@
+<section>
+  <div class="image">
+    <img [src]="data.urlToImage !== 'null' ? data.urlToImage : defaultImgUrl">
+  </div>
+  <div class="content">
+      <h2>{{ data.title }}</h2>
+      <p *ngIf="data.content">{{ data.content }}</p>
+      <small>{{ data.publishedAt | date:'medium' }}</small>
+      <p>Author: {{ data.author }}</p>
+  </div>
+  <div class="content-controler" role="group">
+    <button type="button" class="btn btn-success" [routerLink]="['/edit/', id]">Edit</button>
+    <button type="button" class="btn btn-danger" (click)="remove()">Delete</button>
+</div>
+</section>
+
+<button type="button" class="btn btn-info to-home" routerLink="/dashboard">{{ 'To dashboard' | uppercase }}</button>

@@ -1,0 +1,14 @@
+<div class="image">
+  <img [src]="data.urlToImage !== 'null' ? data.urlToImage : defaultImgUrl">
+</div>
+<div class="content">
+    <p>{{ data.title }}...</p>
+    <button type="button" class="btn btn-link" [routerLink]="['/news/', id]">Read more...</button>
+</div>
+<div class="content-control">
+  <small>{{ data.publishedAt | date:'medium' }}</small>
+  <div class="content-control-group">
+    <button type="button" class="btn btn-success" [routerLink]="['/edit/', id]">Edit</button>
+    <button type="button" class="btn btn-danger" (click)="remove()">Delete</button>
+  </div>
+</div>

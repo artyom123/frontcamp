@@ -1,6 +1,7 @@
 <header>
-  <nav>
-    <a href="/main">Main</a>
-    <a href="/contact">Contact</a>
-  </nav>
+  <div class="logo">
+    {{ 'newsapi' | uppercase }}
+  </div>
+
+  <button type="button" class="btn btn-dark" (click)="login()">Log in</button>
 </header>

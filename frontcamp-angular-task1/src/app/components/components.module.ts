@@ -7,16 +7,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { MainComponent } from './main/main.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { JumbotronComponent } from './jumbotron/jumbotron.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
+import { NewsListComponent } from './news-list/news-list.component';
+import { NewsItemComponent } from './news-list/news-item/news-item.component'; // changed
+import { LoadMoreBtnComponent } from './news-list/load-more-btn/load-more-btn.component';
+import { NewsComponent } from './news/news.component';
+import { NewsFormComponent } from './news-form/news-form.component';
 
 @NgModule({
   declarations: [
     ErrorComponent,
     FooterComponent,
     HeaderComponent,
-    MainComponent,
-    SidebarComponent
+    JumbotronComponent,
+    ConfigurationComponent,
+    NewsListComponent,
+    NewsItemComponent,
+    LoadMoreBtnComponent,
+    NewsComponent,
+    NewsFormComponent
   ],
   imports: [
     CommonModule,
@@ -27,8 +37,13 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ErrorComponent,
     FooterComponent,
     HeaderComponent,
-    MainComponent,
-    SidebarComponent
+    JumbotronComponent,
+    ConfigurationComponent,
+    NewsListComponent,
+    NewsItemComponent,
+    LoadMoreBtnComponent,
+    NewsComponent,
+    NewsFormComponent
   ],
   providers: [],
 })

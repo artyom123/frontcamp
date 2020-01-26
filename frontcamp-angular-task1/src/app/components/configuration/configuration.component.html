@@ -1,0 +1,28 @@
+<section class="configuration">
+  <div class="choose-channel">
+      <select #source (change)="changeSourceTitle(source.value)">
+          <option disabled>Select source</option>
+          <option *ngFor="let channel of channels" [value]="channel.value">
+              {{ channel.title | uppercase }}
+          </option>
+      </select>
+  </div>
+
+  <div class="input-group filter">
+      <input type="text" class="form-control" placeholder="Type your text...">
+      <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="filter()">Filter</button>
+      </div>
+  </div>
+
+  <div class="checkbox">
+      <label (click)="showOwnNews($event)">
+          <input type="checkbox">
+          Only created by me
+      </label>
+  </div>
+
+  <div class="button">
+      <button type="button" class="btn btn-success" routerLink="/add">Add Article</button>
+  </div>
+</section>

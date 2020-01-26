@@ -1,0 +1,42 @@
+.configuration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 0 1.5rem;
+  font-size: 1.6rem;
+
+  .choose-channel {
+    select {
+      max-height: 300px;
+      border-radius: .25rem;
+      border-color: #ced4da;
+      cursor: pointer;
+    }
+  }
+
+  .filter {
+    max-width: 200px;
+
+    input {
+      max-height: 25px;
+      padding: 1.6rem .5rem;
+    }
+
+    input,
+    button {
+      font-size: 1.6rem;
+    }
+  }
+
+  .checkbox.button,
+  label {
+    cursor: pointer;
+  }
+
+  .button {
+    button {
+      font-size: 1.6rem;
+    }
+  }
+}

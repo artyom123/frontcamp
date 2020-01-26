@@ -1,0 +1,13 @@
+<main>
+  <div class="news-block">
+      <div class="news-item" *ngFor="let item of displayData; let index = index">
+          <app-news-item [data]="item" [id]="index"></app-news-item>
+      </div>
+  </div>
+
+  <app-load-more-btn
+      [isDisabled]="displayData?.length === news?.length"
+      (loading)="loadMoreNews()"
+  >
+  </app-load-more-btn>
+</main>

@@ -1,0 +1,62 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 3rem;
+  box-sizing: border-box;
+  max-width: 700px;
+  margin: 1.5rem auto;
+  background: #f7f7f7;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, .2);
+
+  input {
+    min-width: 300px;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+  }
+
+  textarea {
+    min-height: 162px;
+    font-size: 1.6rem;
+    resize: none;
+  }
+
+  .form-radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 15px;
+
+    div {
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        display: block;
+        min-width: 100%;
+        position: relative;
+        margin: 0;
+      }
+    }
+}
+
+  div {
+    margin-right: 1rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .button-controler {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: 80px;
+      font-size: 1.6rem;
+    }
+  }
+}

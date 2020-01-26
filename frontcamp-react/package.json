@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack -p --mode production",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --open",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "flow": "flow"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
@@ -20,6 +21,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^1.0.0",
+    "flow-bin": "^0.116.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
