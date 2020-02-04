@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-load-more-btn',
     templateUrl: './load-more-btn.component.html',
-    styleUrls: ['./load-more-btn.component.scss']
+    styleUrls: ['./load-more-btn.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadMoreBtnComponent {
     @Input() public isDisabled: boolean;

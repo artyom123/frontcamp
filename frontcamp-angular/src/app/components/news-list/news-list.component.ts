@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { NewsService } from 'src/app/services/news.service';
 import { ChannelService } from 'src/app/services/channel.service';
 import { Subscription } from 'rxjs';
@@ -7,7 +7,8 @@ import { Channel, News } from 'src/app/models';
 @Component({
     selector: 'app-news-list',
     templateUrl: './news-list.component.html',
-    styleUrls: ['./news-list.component.scss']
+    styleUrls: ['./news-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsListComponent implements OnInit, OnDestroy {
     public displayData: News[];

@@ -13,15 +13,15 @@ export class NewsService {
     constructor(private http: HttpClient) {}
 
     public get(source: string): void {
-        this.http
-            .get(`${HOST}/v2/top-headlines?sources=${source}&apiKey=${API_KEY}`)
-            .subscribe((data: any) => this.items.next(data.articles));
+      this.http
+        .get(`${HOST}/v2/top-headlines?sources=${source}&apiKey=${API_KEY}`)
+        .subscribe((data: any) => this.items.next(data.articles));
     }
 
     public removeItem(id: number): void {
-        const news = this.items.getValue();
-        news.splice(id, 1);
+      const news = this.items.getValue();
+      news.splice(id, 1);
 
-        this.items.next(news);
+      this.items.next(news);
     }
 }

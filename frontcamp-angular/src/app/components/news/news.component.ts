@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsService } from 'src/app/services/news.service';
 import { News, Channel } from 'src/app/models';
@@ -8,7 +8,8 @@ import { ChannelService } from 'src/app/services/channel.service';
 @Component({
     selector: 'app-news',
     templateUrl: './news.component.html',
-    styleUrls: ['./news.component.scss']
+    styleUrls: ['./news.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewsComponent implements OnInit, OnDestroy {
     public data: News;
@@ -18,24 +19,24 @@ export class NewsComponent implements OnInit, OnDestroy {
     private newsSub: Subscription;
 
     constructor(
-        private route: ActivatedRoute,
-        private newsService: NewsService,
-        private channelService: ChannelService,
-        private router: Router
+      private route: ActivatedRoute,
+      private newsService: NewsService,
+      private channelService: ChannelService,
+      private router: Router
     ) {}
 
     public ngOnInit(): void {
-        this.id = this.route.snapshot.paramMap.get('id');
+      this.id = this.route.snapshot.paramMap.get('id');
 
-        this.newsSub = this.newsService.items
-            .subscribe((data: News[]) => {
-                if (!data.length) {
-                    this.getNews();
-                } else {
-                    this.news = data;
-                    this.data = this.news[this.id];
-                }
-            });
+      this.newsSub = this.newsService.items
+        .subscribe((data: News[]) => {
+          if (!data.length) {
+              this.getNews();
+          } else {
+              this.news = data;
+              this.data = this.news[this.id];
+          }
+        });
     }
 
     public ngOnDestroy(): void {
@@ -45,16 +46,16 @@ export class NewsComponent implements OnInit, OnDestroy {
     }
 
     public remove(): void {
-        this.newsService.removeItem(Number(this.id));
-        this.router.navigateByUrl('/dashboard');
+      this.newsService.removeItem(Number(this.id));
+      this.router.navigateByUrl('/dashboard');
     }
 
     private getNews(): void {
-        const channelTitle: string = this.channelService.title.getValue();
-        const source: Channel = this.channelService.getSource(channelTitle);
+      const channelTitle: string = this.channelService.title.getValue();
+      const source: Channel = this.channelService.getSource(channelTitle);
 
-        if (source) {
-            this.newsService.get(source.value);
-        }
+      if (source) {
+        this.newsService.get(source.value);
+      }
     }
 }

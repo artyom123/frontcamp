@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ChannelService } from 'src/app/services/channel.service';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-jumbotron',
     templateUrl: './jumbotron.component.html',
-    styleUrls: ['./jumbotron.component.scss']
+    styleUrls: ['./jumbotron.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JumbotronComponent implements OnInit, OnDestroy {
     @Input() public title: string;

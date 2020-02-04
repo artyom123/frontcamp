@@ -10,10 +10,11 @@ import { HeaderComponent } from './header/header.component';
 import { JumbotronComponent } from './jumbotron/jumbotron.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { NewsListComponent } from './news-list/news-list.component';
-import { NewsItemComponent } from './news-list/news-item/news-item.component'; // changed
+import { NewsItemComponent } from './news-list/news-item/news-item.component';
 import { LoadMoreBtnComponent } from './news-list/load-more-btn/load-more-btn.component';
 import { NewsComponent } from './news/news.component';
 import { NewsFormComponent } from './news-form/news-form.component';
+import { FilterWordPipe } from '../pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NewsFormComponent } from './news-form/news-form.component';
     NewsItemComponent,
     LoadMoreBtnComponent,
     NewsComponent,
-    NewsFormComponent
+    NewsFormComponent,
+    FilterWordPipe
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { NewsFormComponent } from './news-form/news-form.component';
     NewsItemComponent,
     LoadMoreBtnComponent,
     NewsComponent,
-    NewsFormComponent
+    NewsFormComponent,
+    FilterWordPipe
   ],
   providers: [],
 })

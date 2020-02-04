@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-news-form',
     templateUrl: './news-form.component.html',
-    styleUrls: ['./news-form.component.scss']
+    styleUrls: ['./news-form.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewsFormComponent {
   public radioButtonValue: boolean = false;
@@ -30,15 +31,6 @@ export class NewsFormComponent {
   public change({ target: { value } }): void {
     this.image = value;
 
-    // const file = (event.target as HTMLInputElement).files[0];
     console.log(value);
-
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     this.image = reader.result as string;
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   }
 }
