@@ -1,4 +1,5 @@
 import React from 'react';
+React.useLayoutEffect = React.useEffect 
 import {
     makeStyles,
     Grid,
@@ -27,6 +28,7 @@ const Filter = (props) => {
         items,
         actionFilter,
     } = props;
+    console.log(props);
     const classes = useStyles();
 
     const [value, setValue] = React.useState(0);

@@ -6,7 +6,10 @@
   "scripts": {
     "build": "webpack -p --mode production",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --open",
-    "test": "jest --verbose",
+    "test": "jest --verbose --watchAll",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:cypress": "cypress open",
     "flow": "flow"
   },
   "devDependencies": {
@@ -21,6 +24,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^1.0.0",
+    "cypress": "^3.8.3",
     "flow-bin": "^0.116.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
@@ -34,13 +38,40 @@
   "dependencies": {
     "@material-ui/core": "^4.7.2",
     "axios": "^0.19.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "jest-html-reporter": "^2.8.0",
     "lodash": "^4.17.15",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-redux": "^7.1.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "redux-saga": "^1.1.3"
+    "redux-saga": "^1.1.3",
+    "reportportal-client": "^5.5.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/jestsetup.js"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy"
+    },
+    "resolver": null,
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Test Report"
+        }
+      ]
+    ]
   }
 }

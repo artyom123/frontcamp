@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer render initial 1`] = `ShallowWrapper {}`;
+
+exports[`Logo render initial 1`] = `ShallowWrapper {}`;
