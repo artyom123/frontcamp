@@ -7,13 +7,15 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { NewsPageComponent } from './news-page/news-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
     NotFoundPageComponent,
     DashboardComponent,
     EditPageComponent,
-    NewsPageComponent
+    NewsPageComponent,
+    LoginPageComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { NewsPageComponent } from './news-page/news-page.component';
     NotFoundPageComponent,
     DashboardComponent,
     EditPageComponent,
-    NewsPageComponent
+    NewsPageComponent,
+    LoginPageComponent
   ],
   providers: [],
 })

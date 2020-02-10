@@ -3,5 +3,6 @@
     {{ 'newsapi' | uppercase }}
   </div>
 
-  <button type="button" class="btn btn-dark" (click)="login()">Log in</button>
+  <button *ngIf="!isLogged" type="button" class="btn btn-dark" routerLink="login">Log in</button>
+  <button *ngIf="isLogged" type="button" class="btn btn-dark" (click)="logout()">Log out</button>
 </header>

@@ -5,6 +5,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: '404', component: NotFoundPageComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '**', redirectTo: '/404' }
+  { path: '**', redirectTo: '/404' },
+  { path: 'login', component: LoginPageComponent }
 ];
 
 @NgModule({

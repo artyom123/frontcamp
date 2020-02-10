@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="isVisible">
   <div class="image">
     <img [src]="data.urlToImage !== 'null' ? data.urlToImage : defaultImgUrl">
   </div>
@@ -9,9 +9,11 @@
       <p>Author: {{ data.author }}</p>
   </div>
   <div class="content-controler" role="group">
-    <button type="button" class="btn btn-success" [routerLink]="['/edit/', id]">Edit</button>
-    <button type="button" class="btn btn-danger" (click)="remove()">Delete</button>
+    <button type="button" class="btn btn-success" [disabled]="isButtonDisabled()" [routerLink]="['/edit/', id]">Edit</button>
+    <button type="button" class="btn btn-danger" [disabled]="isButtonDisabled()" (click)="remove()">Delete</button>
 </div>
 </section>
 
-<button type="button" class="btn btn-info to-home" routerLink="/dashboard">{{ 'To dashboard' | uppercase }}</button>
+<button *ngIf="isVisible" type="button" class="btn btn-info to-home" routerLink="/dashboard">{{ 'To dashboard' | uppercase }}</button>
+
+<app-alert [data]="alertData"></app-alert>

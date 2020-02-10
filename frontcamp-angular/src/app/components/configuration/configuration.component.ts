@@ -1,7 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ChannelService } from 'src/app/services/channel.service';
-import { Channel, News } from 'src/app/models';
+import { ChannelService } from '../../services/channel.service';
+import { Channel, Configuration } from '../../models';
+import { NewsService } from '../../services/news.service';
+import { LoginService } from '../../services/login.service';
 import { FilterWordPipe } from '../../pipes/filter.pipe';
 
 @Component({
@@ -12,24 +14,43 @@ import { FilterWordPipe } from '../../pipes/filter.pipe';
   providers: [ FilterWordPipe ]
 })
 export class ConfigurationComponent implements OnInit, OnDestroy {
-  public news: News[];
+  public isLogged: boolean;
+  public isChecked = false;
   public channels: Channel[];
   private channelSub: Subscription;
+  private loginSub: Subscription;
+  private titleSub: Subscription;
+
+  @ViewChild('filterViewInput', {static: false}) filterViewInput: ElementRef;
 
   constructor(
     private channelService: ChannelService,
     private filterPipe: FilterWordPipe,
+    private newsService: NewsService,
+    private loginService: LoginService
   ) {}
 
   public ngOnInit(): void {
     this.channelSub = this.channelService.channels
       .subscribe((data: Channel[]) => this.channels = data);
+
+    this.loginSub = this.loginService.isLogged
+      .subscribe((data: boolean) => this.isLogged = data);
+
+    this.titleSub = this.channelService.title
+      .subscribe((data: string) => {
+        if (data !== 'Local resource') {
+          this.isChecked = false;
+        } else {
+          this.isChecked = true;
+        }
+      });
   }
 
   public ngOnDestroy(): void {
-    if (this.channelSub) {
-      this.channelSub.unsubscribe();
-    }
+    this.unsubscribeFromService(this.channelSub);
+    this.unsubscribeFromService(this.loginSub);
+    this.unsubscribeFromService(this.titleSub);
   }
 
   public changeSourceTitle(value: string): void {
@@ -38,15 +59,26 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   }
 
   public filter(event: { target: HTMLInputElement; }): void {
-    this.news = this.filterPipe.transform(this.news, event.target.value);
-    console.log('Filter');
+    const inputValue = this.filterViewInput.nativeElement.value;
+
+    if (inputValue.length) {
+      const items = inputValue.split(/,\s?|\s/g);
+      this.newsService.filter(items);
+      this.filterViewInput.nativeElement.value = '';
+    }
   }
 
   public showOwnNews(event: MouseEvent): void {
     const target: any = event.target;
 
     if (target.tagName === 'INPUT') {
-      console.log('My news');
+      this.channelService.setSource(Configuration.DATA_BASE_SOURCE);
+    }
+  }
+
+  private unsubscribeFromService(service: Subscription): void {
+    if (service) {
+      service.unsubscribe();
     }
   }
 }

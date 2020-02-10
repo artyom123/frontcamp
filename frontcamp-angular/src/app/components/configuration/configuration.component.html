@@ -3,26 +3,26 @@
       <select #source (change)="changeSourceTitle(source.value)">
           <option disabled>Select source</option>
           <option *ngFor="let channel of channels" [value]="channel.value">
-              {{ channel.title | uppercase }}
+            <span *ngIf="!channel.hidden">{{ channel.title | uppercase }}</span>
           </option>
       </select>
   </div>
 
   <div class="input-group filter">
-      <input type="text" class="form-control" placeholder="Type your text...">
-      <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" (click)="filter($event)">Filter</button>
-      </div>
+    <input #filterViewInput type="text" class="form-control" placeholder="Type your text...">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="filter($event)">Filter</button>
+    </div>
   </div>
 
-  <div class="checkbox">
+  <div class="checkbox" *ngIf="isLogged">
       <label (click)="showOwnNews($event)">
-          <input type="checkbox">
+          <input type="checkbox" [checked]="isChecked" [disabled]="isChecked">
           Only created by me
       </label>
   </div>
 
-  <div class="button">
+  <div class="button" *ngIf="isLogged">
       <button type="button" class="btn btn-success" routerLink="/add">Add Article</button>
   </div>
 </section>

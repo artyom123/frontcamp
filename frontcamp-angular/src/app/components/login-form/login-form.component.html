@@ -1,0 +1,13 @@
+<form *ngIf="isVisible" novalidate (ngSubmit)="login(form)" [formGroup]="form">
+  <div>
+    <input type="text" class="form-control" placeholder="Username" formControlName="username" required>
+    <input type="password" class="form-control" placeholder="Password" formControlName="password" required>
+
+    <div class="btn-group" role="group">
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">Login</button>
+      <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>
+
+<app-alert [data]="alertData"></app-alert>

@@ -14,6 +14,9 @@ import { NewsItemComponent } from './news-list/news-item/news-item.component';
 import { LoadMoreBtnComponent } from './news-list/load-more-btn/load-more-btn.component';
 import { NewsComponent } from './news/news.component';
 import { NewsFormComponent } from './news-form/news-form.component';
+import { AlertComponent } from './alert/alert.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+
 import { FilterWordPipe } from '../pipes/filter.pipe';
 
 @NgModule({
@@ -28,7 +31,9 @@ import { FilterWordPipe } from '../pipes/filter.pipe';
     LoadMoreBtnComponent,
     NewsComponent,
     NewsFormComponent,
-    FilterWordPipe
+    FilterWordPipe,
+    AlertComponent,
+    LoginFormComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +51,9 @@ import { FilterWordPipe } from '../pipes/filter.pipe';
     LoadMoreBtnComponent,
     NewsComponent,
     NewsFormComponent,
-    FilterWordPipe
+    FilterWordPipe,
+    AlertComponent,
+    LoginFormComponent
   ],
   providers: [],
 })

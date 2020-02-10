@@ -1,4 +1,5 @@
 export const channels = new Map([
+  ['Local resource', 'local-resource'],
   ['ABC News', 'abc-news'],
   ['ABC News (AU)', 'abc-news-au'],
   ['Aftenposten', 'aftenposten'],

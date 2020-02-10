@@ -11,51 +11,78 @@ import { Channel, News } from 'src/app/models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsListComponent implements OnInit, OnDestroy {
-    public displayData: News[];
-    public news: News[];
-    private numberOfDisplayedItems = 4;
-    private channelSub: Subscription;
-    private newsSub: Subscription;
+  public displayData: News[];
+  public news: News[];
+  private numberOfDisplayedItems = 5;
+  public source: Channel;
+  public isFiltered = false;
+  private channelSub: Subscription;
+  private newsSub: Subscription;
+  private filterItemsSub: Subscription;
 
-    constructor(
-        private newsService: NewsService,
-        private channelService: ChannelService
-    ) {}
+  constructor(
+    private newsService: NewsService,
+    private channelService: ChannelService
+  ) {}
 
-    public ngOnInit(): void {
-        this.channelSub = this.channelService.title
-            .subscribe((data: string) => {
-                const source: Channel = this.channelService.getSource(data);
+  public ngOnInit(): void {
+    this.channelSub = this.channelService.title
+      .subscribe((data: string) => {
+        this.source = this.channelService.getSource(data);
 
-                if (source && !this.isSourceEqual(source)) {
-                    this.newsService.get(source.value);
-                }
-            });
-
-        this.newsSub = this.newsService.items
-            .subscribe((data: News[]) => {
-                this.news = data;
-                this.displayData = this.news.slice(0, this.numberOfDisplayedItems);
-            });
-    }
-
-    public ngOnDestroy(): void {
-        if (this.channelSub) {
-            this.channelSub.unsubscribe();
+        if (this.source && !this.isSourceEqual(this.source)) {
+          this.newsService.get(this.source.value);
         }
+      });
 
-        if (this.newsSub) {
-            this.newsSub.unsubscribe();
-        }
-    }
-
-    public loadMoreNews(): void {
-        this.numberOfDisplayedItems *= 2;
+    this.newsSub = this.newsService.items
+      .subscribe((data: News[]) => {
+        this.isFiltered = false;
+        this.news = data;
         this.displayData = this.news.slice(0, this.numberOfDisplayedItems);
-    }
+      });
 
-    private isSourceEqual(source): boolean {
-        const items = this.newsService.items.getValue();
-        return Boolean(items.find(item => item.source.id === source.value));
+    this.filterItemsSub = this.newsService.filterItems
+        .subscribe((data: string[]) => this.filterDisplayedData(data));
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribeFromService(this.channelSub);
+    this.unsubscribeFromService(this.newsSub);
+    this.unsubscribeFromService(this.filterItemsSub);
+  }
+
+  public loadMoreNews(): void {
+    this.numberOfDisplayedItems *= 2;
+    this.displayData = this.news.slice(0, this.numberOfDisplayedItems);
+  }
+
+  private isSourceEqual(source): boolean {
+      const items = this.newsService.items.getValue();
+      return Boolean(items.find(item => item.source.id === source.value));
+  }
+
+  private filterDisplayedData(filterItems: string[]): void {
+    this.displayData = this.displayData.filter(news => {
+      let count = 0;
+
+      filterItems.forEach(item => {
+        const title = news.title.toLowerCase();
+
+        if (title.includes(item.toLowerCase())) {
+          count++;
+        }
+      });
+
+        return count === filterItems.length;
+    });
+
+    this.isFiltered = true;
+  }
+
+  private unsubscribeFromService(service: Subscription): void {
+    if (service) {
+      service.unsubscribe();
     }
+  }
 }

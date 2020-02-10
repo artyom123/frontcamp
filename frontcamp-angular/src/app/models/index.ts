@@ -1,2 +1,3 @@
 export { Channel } from './channel';
-export { News } from './news';
+export { News, NewsItem, Source } from './news';
+export { Configuration } from './configuration';
